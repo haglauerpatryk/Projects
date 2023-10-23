@@ -1,6 +1,6 @@
 Hi!
 
-I uploaded for the time being only one project, because for one thing:
+I uploaded for the time being only one project, because:
   - I prefered to do one bigger project than 10 smaller.
   - I wanted to show some of my actual work and not mini projects from various courses.
 
