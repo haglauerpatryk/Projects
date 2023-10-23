@@ -70,7 +70,7 @@ def remove_outliers(df, check_column, column1="TICKER", column2="DATE"):
 
     
 
-      2.And this is to actual performing of data cleaning:
+      2.And this is an actual performing of data cleaning:
 
     csv_files = [
     "C:/Users/paha3/Desktop/Python/nasdaqetfs.csv",
