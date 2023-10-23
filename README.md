@@ -104,3 +104,9 @@ for file_path in csv_files:
     df.loc[df["DAILY_RETURN"] > 0.9, "DAILY_RETURN"] = 0
     
     df.to_csv(file_path, index=False)
+    
+
+
+
+
+    Also I created a database and plotted some data using SQL queries.
