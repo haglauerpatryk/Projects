@@ -10,10 +10,11 @@ Showcase of the structure of the views.py file
 BaseView:
     IndexView
     ContactView
-    StockView:
-        TablesView
-        ChartsView
-        FavouriteView
+
+StockView:
+    TablesView
+    ChartsView
+    FavouriteView
 
 """
 
@@ -48,24 +49,26 @@ class ContactView(BaseView):
         return render(request, "contact.html", {"title": self.title})
     
 
-class StockView(BaseView):
+class StockView(View):
+    title = None
+    template_name = None
 
-    def post(self, request):
-        if request.method != "POST":
-            return render(request, "index.html", {"title": self.title})
-
-        ticker = request.POST.get("ticker")
-        date   = request.POST.get("date")
-        open   = request.POST.get("open")
-        high   = request.POST.get("high")
-        low    = request.POST.get("low")
-        close  = request.POST.get("close")
-        volume = request.POST.get("volume")
+    def get(self, request):
+        if request.method != "get":
+            return render(request, self.template_name, {"title": self.title})
+        
+        ticker = request.GET.get("ticker")
+        date   = request.GET.get("date")
+        open   = request.GET.get("open")
+        high   = request.GET.get("high")
+        low    = request.GET.get("low")
+        close  = request.GET.get("close")
+        volume = request.GET.get("volume")
 
         query = Stock(ticker=ticker, date=date, open=open, high=high, low=low, close=close, volume=volume)
         query.save()
         messages.info(request, "Your stock has been saved successfully!")
-        return render(request, "index.html", {"title": self.title})
+        return render(request, self.template_name, {"title": self.title})
 
 class TablesView(StockView):
     title = "Tables"
