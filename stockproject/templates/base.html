@@ -3,11 +3,22 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
+  <!-- =======================================================
+    Current Blocks:
+    - head,
+    - pagetitle,
+    - content,
+
+    Variables:
+    - title,
+  ======================================================== -->
+
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>{% block title%}{% endblock title %}</title>
+  <title>{{ title }}</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -208,9 +219,9 @@
   <div class="pagetitle">
     <h1>{% block pagetitle %}{% endblock pagetitle %}</h1>
   </div><!-- End Page Title -->
-  {% block content %}
+  {% block body %}
 
-  {% endblock content %}
+  {% endblock body %}
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
