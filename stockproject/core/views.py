@@ -11,8 +11,8 @@ def tables(request):
 def charts(request):
     return render(request, "charts.html")
 
-def favorite(request):
-    return render(request, "favorite.html")
+def favourite(request):
+    return render(request, "favourite.html")
 
 def contact(request):
     return render(request, "contact.html")
