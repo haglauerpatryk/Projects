@@ -6,31 +6,33 @@ from django.views import View
 
 """
 Showcase of the structure of the views.py file
+ViewConfig:
+    BaseTemplateView:
+        IndexView
+        ContactView
 
-BaseView:
-    IndexView
-    ContactView
-
-StockView:
-    TablesView
-    ChartsView
-    FavouriteView
+    StockTemplateView:
+        TablesView
+        ChartsView
+        FavouriteView
 
 """
 
-class BaseView(View):
+class ViewConfig(View):
     title = None
     template_name = None
+
+class BaseTemplateView(ViewConfig):
 
     def get(self, request):
         return render(request, self.template_name, {"title": self.title})
     
 
-class IndexView(BaseView):
+class IndexView(BaseTemplateView):
     title = "Dashboard"
     template_name = "index.html"
 
-class ContactView(BaseView):
+class ContactView(BaseTemplateView):
     title = "Contact"
     template_name = "contact.html"
 
@@ -43,15 +45,18 @@ class ContactView(BaseView):
         message = request.POST.get("message")
         pnumber = request.POST.get("pnumber")
 
-        query = Contact(name=name, email=email, message=message, pnumber=pnumber)
+        query = Contact(
+            name=name, 
+            email=email, 
+            message=message, 
+            pnumber=pnumber
+        )
         query.save()
         messages.info(request, "Your message has been sent successfully!")
         return render(request, "contact.html", {"title": self.title})
     
 
-class StockView(View):
-    title = None
-    template_name = None
+class StockTemplateView(ViewConfig):
 
     def get(self, request):
         if request.method != "get":
@@ -65,21 +70,29 @@ class StockView(View):
         close  = request.GET.get("close")
         volume = request.GET.get("volume")
 
-        query = Stock(ticker=ticker, date=date, open=open, high=high, low=low, close=close, volume=volume)
+        query = Stock(
+            ticker=ticker, 
+            date=date, 
+            open=open, 
+            high=high, 
+            low=low, 
+            close=close, 
+            volume=volume
+        )
         query.save()
         messages.info(request, "Your stock has been saved successfully!")
         return render(request, self.template_name, {"title": self.title})
 
-class TablesView(StockView):
+class TablesView(StockTemplateView):
     title = "Tables"
     template_name = "tables.html"
 
 
-class ChartsView(StockView):
+class ChartsView(StockTemplateView):
     title = "Charts"
     template_name = "charts.html"
 
 
-class FavouriteView(StockView):
+class FavouriteView(StockTemplateView):
     title = "Favourite"
     template_name = "favourite.html"
