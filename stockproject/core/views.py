@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Stock, Contact
 from django.contrib import messages
 from django.views import View
-
+from .forms import StockForm
 
 """
 Showcase of the structure of the views.py file
@@ -59,29 +59,12 @@ class ContactView(BaseTemplateView):
 class StockTemplateView(ViewConfig):
 
     def get(self, request):
-        if request.method != "get":
+        if request.method != "GET":
             return render(request, self.template_name, {"title": self.title})
-        
-        ticker = request.GET.get("ticker")
-        date   = request.GET.get("date")
-        open   = request.GET.get("open")
-        high   = request.GET.get("high")
-        low    = request.GET.get("low")
-        close  = request.GET.get("close")
-        volume = request.GET.get("volume")
 
-        query = Stock(
-            ticker=ticker, 
-            date=date, 
-            open=open, 
-            high=high, 
-            low=low, 
-            close=close, 
-            volume=volume
-        )
-        query.save()
-        messages.info(request, "Your stock has been saved successfully!")
-        return render(request, self.template_name, {"title": self.title})
+        stocks = Stock.objects.all()
+
+        return render(request, self.template_name, {"stocks": stocks, "title": self.title})
 
 class TablesView(StockTemplateView):
     title = "Tables"

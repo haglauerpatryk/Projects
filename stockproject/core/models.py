@@ -4,12 +4,13 @@ from django.db import models
 
 class Stock(models.Model):
     
+    id     = models.AutoField(primary_key=True)
     ticker = models.CharField(max_length=10)
     date   = models.DateField()
-    open   = models.FloatField()
-    high   = models.FloatField()
-    low    = models.FloatField()
-    close  = models.FloatField()
+    open_stock   = models.FloatField()
+    high_stock   = models.FloatField()
+    low_stock    = models.FloatField()
+    close_stock  = models.FloatField()
     volume = models.FloatField()
 
     def __str__(self):
