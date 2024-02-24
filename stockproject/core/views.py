@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from .models import Stock, Contact
 from django.contrib import messages
 from django.views import View
-from .forms import StockForm
 
 """
 Showcase of the structure of the views.py file
