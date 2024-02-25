@@ -61,9 +61,21 @@ class StockTemplateView(ViewConfig):
         if request.method != "GET":
             return render(request, self.template_name, {"title": self.title})
 
-        stocks = DailyStockData.objects.all()
+        fields_to_display = [
+            "ticker",
+            "date", 
+            "daily_open", 
+            "daily_high", 
+            "daily_low", 
+            "daily_close", 
+            "daily_volume", 
+            "daily_return"
+            ]
 
-        return render(request, self.template_name, {"stocks": stocks, "title": self.title})
+        stocks = DailyStockData.objects.values(*fields_to_display)
+
+        return render(request, self.template_name, {"stocks": stocks,
+                                                     "title": self.title})
 
 class TablesView(StockTemplateView):
     title = "Tables"

@@ -38,10 +38,10 @@
           <tr>
             <th scope="row"><a href="#" class="text-primary">{{ stock.ticker }}</a></th>
             <td>{{ stock.date }}</td>
-            <td>{{ stock.open_stock }}</td>
-            <td>{{ stock.high_stock }}</td>
-            <td>{{ stock.low_stock }}</td>
-            <td>{{ stock.close_stock }}</td>
+            <td>{{ stock.daily_open }}</td>
+            <td>{{ stock.daily_high }}</td>
+            <td>{{ stock.daily_low }}</td>
+            <td>{{ stock.daily_close }}</td>
           </tr>
           {% endfor %}
         </tbody>
