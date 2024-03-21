@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Contact, DailyStockData, MonthlyStockData, YearlyStockData
+from .models import Contact, DailyStockData
 from django.contrib import messages
 from django.views import View
 
@@ -68,8 +68,7 @@ class StockTemplateView(ViewConfig):
             "daily_high", 
             "daily_low", 
             "daily_close", 
-            "daily_volume", 
-            "daily_return"
+            "daily_volume"
             ]
 
         stocks = DailyStockData.objects.values(*fields_to_display)

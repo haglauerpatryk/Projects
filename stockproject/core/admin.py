@@ -1,9 +1,7 @@
 from django.contrib import admin
-from .models import Contact, DailyStockData, MonthlyStockData, YearlyStockData
+from .models import Contact, DailyStockData
 
 # Register your models here.
 
 admin.site.register(DailyStockData)
-admin.site.register(MonthlyStockData)
-admin.site.register(YearlyStockData)
 admin.site.register(Contact)

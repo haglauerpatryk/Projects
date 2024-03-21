@@ -34,7 +34,7 @@
           </tr>
         </thead>
         <tbody>
-          {% for stock in stocks %}
+          {% for stock in stocks|slice:":50" %}
           <tr>
             <th scope="row"><a href="#" class="text-primary">{{ stock.ticker }}</a></th>
             <td>{{ stock.date }}</td>
