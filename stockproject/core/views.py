@@ -24,8 +24,7 @@ class ViewConfig(View):
 class BaseTemplateView(ViewConfig):
 
     def get(self, request):
-        if request.method == "GET":
-            return render(request, self.template_name, {"title": self.title})
+        return render(request, self.template_name, {"title": self.title})
     
 
 class IndexView(BaseTemplateView):
@@ -37,29 +36,25 @@ class ContactView(BaseTemplateView):
     template_name = "contact.html"
 
     def post(self, request):
-        if request.method == "POST":
-        
-            name    = request.POST.get("name")
-            email   = request.POST.get("email")
-            message = request.POST.get("message")
-            pnumber = request.POST.get("pnumber")
+        name    = request.POST.get("name")
+        email   = request.POST.get("email")
+        message = request.POST.get("message")
+        pnumber = request.POST.get("pnumber")
 
-            query = Contact(
-                name=name, 
-                email=email, 
-                message=message, 
-                pnumber=pnumber
-            )
-            query.save()
-            messages.info(request, "Your message has been sent successfully!")
-            return render(request, "contact.html", {"title": self.title})
+        query = Contact(
+            name=name, 
+            email=email, 
+            message=message, 
+            pnumber=pnumber
+        )
+        query.save()
+        messages.info(request, "Your message has been sent successfully!")
+        return render(request, "contact.html", {"title": self.title})
     
 
 class StockTemplateView(ViewConfig):
 
     def get(self, request):
-        if request.method != "GET":
-            return render(request, self.template_name, {"title": self.title})
 
         fields_to_display = [
             "ticker",
@@ -73,8 +68,11 @@ class StockTemplateView(ViewConfig):
 
         stocks = DailyStockData.objects.values(*fields_to_display)
 
-        return render(request, self.template_name, {"stocks": stocks,
-                                                     "title": self.title})
+        return render(
+            request, 
+            self.template_name, 
+            {"stocks": stocks, "title": self.title}
+            )
 
 class TablesView(StockTemplateView):
     title = "Tables"
